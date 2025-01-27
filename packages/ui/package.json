@@ -9,7 +9,8 @@
   ],
   "exports": {
     "./styles.css": "./dist/index.css",
-    "./card": "./src/card.tsx"
+    "./card": "./src/card.tsx",
+    "./AppBar": "./src/AppBar.tsx"
   },
   "license": "MIT",
   "scripts": {
@@ -31,5 +32,9 @@
     "postcss": "^8.5.1",
     "tailwindcss": "^4.0.0",
     "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0"
   }
 }
