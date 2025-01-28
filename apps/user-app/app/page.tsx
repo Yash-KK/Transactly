@@ -2,11 +2,10 @@ import React from "react";
 import { prisma } from "@repo/db";
 
 export default async function Page() {
-  const data = await prisma.user.findFirst();
+  // const data = await prisma.user.findFirst();
   return (
     <>
-
-      <div className="flex justify-center items-center h-screen bg-gray-500">
+      <div className="flex justify-center items-center h-[calc(100vh-64px)] bg-gray-900">
         <a
           href="#"
           className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100"
@@ -15,10 +14,10 @@ export default async function Page() {
             Data being fetched from DB
           </h5>
           <p className="font-normal text-gray-700">
-            Username: {data?.name}
+            {/* Username: {data?.firstName} */}
           </p>
           <p className="font-normal text-gray-700">
-            Email: {data?.email}
+            {/* Email: {data?.email} */}
           </p>
         </a>
       </div>
