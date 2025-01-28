@@ -1,6 +1,4 @@
 import React from "react";
-import { prisma } from "@repo/db";
-
 export default async function Page() {
   // const data = await prisma.user.findFirst();
   return (
