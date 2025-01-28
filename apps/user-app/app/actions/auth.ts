@@ -1,7 +1,7 @@
-'use server'
+"use server";
 import { prisma } from "@repo/db";
 import { z } from "zod";
-
+import bcrypt from  "bcryptjs";
 
 const SignUpSchema = z.object({
   firstName: z.string().trim().min(1, { message: "Name field is required" }),
@@ -13,26 +13,44 @@ export async function signupAction(
   email: string,
   password: string
 ) {
-  const validatedContactFormData = SignUpSchema.safeParse({
+  const validatedSignUpData = SignUpSchema.safeParse({
     firstName,
     email,
-    password
+    password,
   });
-  console.log('validatedContactFormData: ', validatedContactFormData)
+
+  if (!validatedSignUpData.success) {
+    return { success: false, message: "Invalid user input" };
+  }
+
   try {
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
-    
+
     if (existingUser) {
-      return { success: false, message: 'Email already exists' };
+      return { success: false, message: "Email already exists" };
     }
+    const hashedPassword = await bcrypt.hash(validatedSignUpData.data!.password, 10);
 
-    console.log(firstName,  email, password)
+    try{
+      await prisma.user.create({
+        data: {
+          firstName: validatedSignUpData.data!.firstName,
+          email: validatedSignUpData.data!.email,
+          password: hashedPassword,
+        },
+      });
+  
+    } catch(error){
+      return { success: false, message: "failed to create new user" };
 
-    return { success: true, user: 'new-user' };
+    }
+    
+
+    return { success: true, message: "New user created" };
   } catch (error) {
     console.error(error);
-    return { success: false, message: 'An error occurred while signing up' };
+    return { success: false, message: "An error occurred while signing up" };
   }
 }

@@ -1,16 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { signupAction } from "../actions/auth";
+
 import Button from "@repo/ui/button";
 import Label from "@repo/ui/label";
 import InputBox from "@repo/ui/inputbox";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
-const SignUp: React.FC = () => {
+const SignIn: React.FC = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
   });
@@ -30,28 +29,23 @@ const SignUp: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-
-    const { firstName, email, password } = formData;
-
-    if (!firstName || !email || !password) {
+    const { email, password } = formData;
+    if (!email || !password) {
       setError("Please fill in all fields");
       setLoading(false);
       return;
     }
 
-    try {
-      const result = await signupAction(firstName, email, password);
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false, // Prevent automatic redirect
+    });
 
-      if (result.success) {
-        console.log("Signup successful");
-      } else {
-        setError(result.message || "Signup failed");
-      }
-    } catch (error) {
-      setError("An error occurred");
-    } finally {
-      setLoading(false);
+    if (result?.error) {
+      setError(result.error); // Set error message if sign-in fails
     }
+    setLoading(false);
   };
 
   return (
@@ -67,24 +61,12 @@ const SignUp: React.FC = () => {
               src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
               alt="logo"
             />
-            Sign Up
+            Sign In
           </a>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create an account
-              </h1>
+                
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <Label name="First Name" />
-                  <InputBox
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
                 <div>
                   <Label name="Email" />
                   <InputBox
@@ -108,15 +90,15 @@ const SignUp: React.FC = () => {
 
                 {error && <div className="text-red-500">{error}</div>}
 
-                <Button signup={true} loading={loading} />
+                <Button signup={false} loading={loading} />
                 {/* Login Link */}
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account?{" "}
+                  Do not  have an account?{" "}
                   <Link
-                    href="/signin"
+                    href="/signup"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                   >
-                    Sign In here
+                    Sign up here
                   </Link>
                 </p>
               </form>
@@ -128,4 +110,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default SignIn;
