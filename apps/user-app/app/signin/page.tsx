@@ -35,17 +35,25 @@ const SignIn: React.FC = () => {
       setLoading(false);
       return;
     }
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false, // Prevent automatic redirect
-    });
-
-    if (result?.error) {
-      setError(result.error); // Set error message if sign-in fails
+      if (result?.error) {
+        setError(result.error);
+      } else {
+        // Redirect to home page on successful login
+        // window.location.href = "/";
+        alert("all good")
+      }
+    } catch (error) {
+      setError("An error occurred during sign in");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
