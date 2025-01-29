@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Button from "@repo/ui/button";
 import Label from "@repo/ui/label";
@@ -9,6 +10,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 
 const SignIn: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -45,9 +47,7 @@ const SignIn: React.FC = () => {
       if (result?.error) {
         setError(result.error);
       } else {
-        // Redirect to home page on successful login
-        // window.location.href = "/";
-        alert("all good")
+        router.push("/");
       }
     } catch (error) {
       setError("An error occurred during sign in");
@@ -73,7 +73,6 @@ const SignIn: React.FC = () => {
           </a>
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <Label name="Email" />
@@ -101,7 +100,7 @@ const SignIn: React.FC = () => {
                 <Button signup={false} loading={loading} />
                 {/* Login Link */}
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Do not  have an account?{" "}
+                  Do not have an account?{" "}
                   <Link
                     href="/signup"
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
