@@ -4,7 +4,7 @@ type LabelProps = {
 };
 const Label: React.FC<LabelProps> = ({ name }) => {
   return (
-    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+    <label className="block mb-2 text-sm font-medium text-gray-900 text-white">
       {name}
     </label>
   );
