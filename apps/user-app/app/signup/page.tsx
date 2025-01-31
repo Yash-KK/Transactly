@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import { signupAction } from "../actions/auth";
+import { useRouter } from "next/navigation";
 import Button from "@repo/ui/button";
 import Label from "@repo/ui/label";
 import InputBox from "@repo/ui/inputbox";
 import Link from "next/link";
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -43,7 +45,7 @@ const SignUp: React.FC = () => {
       const result = await signupAction(firstName, email, password);
 
       if (result.success) {
-        console.log("Signup successful");
+        router.push("/signin")
       } else {
         setError(result.message || "Signup failed");
       }
