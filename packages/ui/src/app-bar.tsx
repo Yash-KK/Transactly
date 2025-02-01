@@ -20,7 +20,10 @@ export default function AppBar() {
   };
   return (
     <div className="flex items-center justify-around bg-gray-900 p-4">
-      <button onClick={handleRedirection} className="flex space-x-3 cursor-pointer">
+      <button
+        onClick={handleRedirection}
+        className="flex space-x-3 cursor-pointer"
+      >
         <img
           src="https://flowbite.com/docs/images/logo.svg"
           className="h-8"
@@ -29,17 +32,18 @@ export default function AppBar() {
         <span className="text-2xl font-semibold text-white">Transactly</span>
       </button>
 
-        {session.status === "authenticated" ? (
-          <>
-            <button
-              onClick={handleSignOut}
-              className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
-            >
-              Sign Out
-            </button>
-          </>
-        ) : (
-          <>
+      {session.status === "authenticated" ? (
+        <>
+          <button
+            onClick={handleSignOut}
+            className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
+          >
+            Sign Out
+          </button>
+        </>
+      ) : (
+        <div className="flex space-x-4">
+          <div>
             <button
               onClick={() => {
                 router.push("/signup");
@@ -48,6 +52,8 @@ export default function AppBar() {
             >
               Sign Up
             </button>
+          </div>
+          <div>
             <button
               onClick={() => {
                 router.push("/signin");
@@ -56,8 +62,9 @@ export default function AppBar() {
             >
               Sign In
             </button>
-          </>
-        )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

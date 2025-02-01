@@ -15,7 +15,10 @@
     "./label": "./src/label.tsx",    
     "./inputbox": "./src/inputbox.tsx",    
     "./side-bar": "./src/side-bar.tsx",
-    "./add-money": "./src/add-money.tsx"
+    "./add-money": "./src/add-money.tsx",
+    "./total-balance": "./src/total-balance.tsx",    
+    "./recent-transactions": "./src/recent-transactions.tsx"    
+
   },
   "license": "MIT",
   "scripts": {
