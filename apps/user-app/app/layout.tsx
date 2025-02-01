@@ -2,7 +2,7 @@ import "./globals.css";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import AppBar from "@repo/ui/AppBar";
+import AppBar from "@repo/ui/app-bar";
 import { getServerSession } from "next-auth";
 import { SessionProvider } from "./providers/SessionProvider";
 
