@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { signupAction } from "../actions/auth";
+import { signupAction } from "../lib/actions/auth";
 import { useRouter } from "next/navigation";
 import Button from "@repo/ui/button";
 import Label from "@repo/ui/label";
