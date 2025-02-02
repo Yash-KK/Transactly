@@ -18,11 +18,12 @@
     "./add-money": "./src/transfer/add-money.tsx",
     "./total-balance": "./src/transfer/total-balance.tsx",    
     "./recent-transactions": "./src/transfer/recent-transactions.tsx",
+    "./display-balance": "./src/transfer/balance/display-balance.tsx",
     "./github-button": "./src/auth/github-button.tsx",    
     "./auth-label": "./src/auth/auth-label.tsx",    
     "./auth-form-layout": "./src/auth/auth-form-layout.tsx",    
     "./auth-redirect": "./src/auth/auth-redirect.tsx",    
-    "./display-error": "./src/display-error.tsx"    
+    "./display-error": "./src/display-error.tsx"
   },
   "license": "MIT",
   "scripts": {
