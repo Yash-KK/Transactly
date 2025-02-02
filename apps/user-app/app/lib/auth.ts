@@ -1,4 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
 import { prisma } from "@repo/db";
 import { compare } from "bcryptjs";
 
@@ -37,6 +38,10 @@ export const authOptions = {
           };
         },
       }),
+      GitHubProvider({
+        clientId: process.env.GITHUB_ID as string,
+        clientSecret: process.env.GITHUB_SECRET as string
+      })
     ],
     pages: {
       signIn: "/signin",
