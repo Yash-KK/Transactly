@@ -6,7 +6,10 @@ import { useRouter } from "next/navigation";
 import Button from "@repo/ui/button";
 import Label from "@repo/ui/label";
 import InputBox from "@repo/ui/inputbox";
-import Link from "next/link";
+import AuthLabel from "@repo/ui/auth-label";
+import AuthRedirect from "@repo/ui/auth-redirect";
+import AuthFormLayout from "@repo/ui/auth-form-layout";
+import DisplayError from "@repo/ui/display-error";
 
 const SignUp: React.FC = () => {
   const router = useRouter();
@@ -57,74 +60,37 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div>
-      <section className="bg-gray-900">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-[calc(100vh-64px)] lg:py-0">
-          <a
-            href="#"
-            className="flex items-center mb-6 text-2xl font-semibold text-white"
-          >
-            <img
-              className="w-8 h-8 mr-2"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-              alt="logo"
-            />
-            Sign Up
-          </a>
-          <div className="w-full bg-gray-800 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-white md:text-2xl">
-                Create an account
-              </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <Label name="First Name" />
-                  <InputBox
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                  />
-                </div>
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-[calc(100vh-64px)] bg-gray-900 lg:py-0">
+      <AuthLabel label="Sign Up" />
+      <AuthFormLayout handleSubmit={handleSubmit}>
+        <Label name="First Name" />
+        <InputBox
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleInputChange}
+        />
 
-                <div>
-                  <Label name="Email" />
-                  <InputBox
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                </div>
+        <Label name="Email" />
+        <InputBox
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
 
-                <div>
-                  <Label name="Password" />
-                  <InputBox
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                  />
-                </div>
+        <Label name="Password" />
+        <InputBox
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+        />
 
-                {error && <div className="text-red-500">{error}</div>}
-
-                <Button signup={true} loading={loading} />
-                {/* Login Link */}
-                <p className="text-sm font-light text-gray-300">
-                  Already have an account?{" "}
-                  <Link
-                    href="/signin"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Sign In here
-                  </Link>
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+        {error && <DisplayError errorMessage={error} />}
+        <Button signup={true} loading={loading} />
+        <AuthRedirect signIn={false} />
+      </AuthFormLayout>
     </div>
   );
 };

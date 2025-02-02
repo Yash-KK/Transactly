@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
-
+import Label from "../label";
+import InputBox from "../inputbox";
 const AddMoney: React.FC = () => {
   const [formData, setFormData] = useState({
     amount: "",
@@ -25,31 +26,24 @@ const AddMoney: React.FC = () => {
   };
   return (
     <div className="min-h-[50vh] lg:h-[calc(100vh-64px)] flex justify-center items-center flex-col bg-slate-200 p-4">
-      <h2 className="font-mono mb-6 text-4xl lg:text-6xl font-semibold">Transfer</h2>
+      <h2 className="font-mono mb-6 text-4xl lg:text-6xl font-semibold">
+        Transfer
+      </h2>
       <form
         onSubmit={handleSubmit}
         className="w-full rounded-lg border border-gray-200 border-gray-700 dark:bg-gray-800 max-w-xl lg:p-8"
       >
         <div className="flex flex-col">
-          <div>
-            <label className="mb-2 block text-sm font-medium text-gray-900 text-white">
-              Amount
-            </label>
-            <input
+            <Label name="Amount" />
+            <InputBox
               type="text"
               name="amount"
               value={formData.amount}
               onChange={handleInputChange}
-              className="block w-full mb-5 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
               placeholder="100"
-              required
             />
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-gray-900 dark:text-white">
-              Bank
-            </label>
+            <br />
+            <Label name="Bank" />
             <select
               name="selectedBank"
               value={formData.selectedBank}
@@ -63,7 +57,6 @@ const AddMoney: React.FC = () => {
               <option value="HDFC">HDFC</option>
               <option value="AXIS">AXIS</option>
             </select>
-          </div>
         </div>
 
         <button
