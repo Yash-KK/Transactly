@@ -54,7 +54,7 @@ const SignIn: React.FC = () => {
       if (result?.error) {
         setError(result.error);
       } else {
-        router.push("/dashboard");
+        router.push("/home");
       }
     } catch (error) {
       setError("An error occurred during sign in");

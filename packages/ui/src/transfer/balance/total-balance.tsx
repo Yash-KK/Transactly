@@ -1,9 +1,9 @@
 import React from "react";
-import DisplayBalance from "./balance/display-balance";
+import DisplayBalance from "./display-balance";
 const TotalBalance: React.FC = () => {
   return (
     <div
-      className="h-1/3 m-5 space-y-4 border rounded p-6 border-gray-700 bg-gray-800 overflow-y-auto  [&::-webkit-scrollbar]:w-2
+      className="h-1/3 m-5 space-y-4 border rounded p-6 border-gray-700 bg-gray-800 overflow-y-auto [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar-track]:bg-gray-100
   [&::-webkit-scrollbar-thumb]:bg-gray-300
   dark:[&::-webkit-scrollbar-track]:bg-neutral-700
