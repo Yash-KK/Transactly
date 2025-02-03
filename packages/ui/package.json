@@ -16,6 +16,7 @@
     "./inputbox": "./src/inputbox.tsx",    
     "./side-bar": "./src/side-bar.tsx",
     "./add-money": "./src/transfer/add-money.tsx",
+    "./loading-skeleton": "./src/transfer/loading-skeleton.tsx",
     "./total-balance": "./src/transfer/balance/total-balance.tsx",    
     "./recent-transactions": "./src/transfer/recent-transactions/recent-transactions.tsx",
     "./display-balance": "./src/transfer/balance/display-balance.tsx",
