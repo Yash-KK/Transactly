@@ -2,6 +2,7 @@ import React from "react";
 import DisplayTransactions from "./display-transactions";
 
 type Transaction = {
+  status: string,
   startTime: Date;
   amount: number;
 };
@@ -36,6 +37,7 @@ const RecentTransactions: React.FC<RecentTransactionsProps> = ({
             <DisplayTransactions
               key={index}
               title="Received"
+              onRampstatus={transaction.status}
               date={transaction.startTime}
               amount={transaction.amount}
             />
