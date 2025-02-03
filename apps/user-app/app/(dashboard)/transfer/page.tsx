@@ -10,12 +10,12 @@ const getOnRampTransactions = async () => {
   const userId = await getUserId();
   const transactions = await prisma.onRampTransaction.findMany({
     where: {
-      userId: userId
+      userId: userId,
     },
     select: {
       amount: true,
       startTime: true,
-      status: true
+      status: true,
     },
   });
 

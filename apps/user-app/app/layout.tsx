@@ -5,8 +5,9 @@ import { Inter } from "next/font/google";
 import AppBar from "@repo/ui/app-bar";
 import { getServerSession } from "next-auth";
 import { SessionProvider } from "./providers/SessionProvider";
+import ToastProvider from "@repo/ui/toast-context";
 
-const inter = Inter({ subsets: ["latin"], });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Transactly",
@@ -24,8 +25,10 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider session={session}>
-          <AppBar />
-          {children}
+          <ToastProvider>
+            <AppBar />
+            {children}
+          </ToastProvider>
         </SessionProvider>
       </body>
     </html>
