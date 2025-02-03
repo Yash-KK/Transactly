@@ -2,7 +2,14 @@
 import React, { useState } from "react";
 import Label from "../label";
 import InputBox from "../inputbox";
-const AddMoney: React.FC = () => {
+import { useRouter } from "next/navigation"; // Add this import at the top
+
+type AddMoneyProps = {
+  createOnRampTransaction: any;
+};
+const AddMoney: React.FC<AddMoneyProps> = ({ createOnRampTransaction }) => {
+  const router = useRouter(); // Add this line
+
   const [formData, setFormData] = useState({
     amount: "",
     selectedBank: "",
@@ -18,11 +25,22 @@ const AddMoney: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Amount:", formData.amount);
     console.log("Selected Bank:", formData.selectedBank);
-    alert("hello world");
+
+    const response = await createOnRampTransaction({
+      amount: formData.amount,
+      provider: formData.selectedBank,
+    });
+    if (response.status) {
+      alert("success");
+      setFormData({ amount: "", selectedBank: "" });
+      router.refresh();
+    } else {
+      alert(response.message);
+    }
   };
   return (
     <div className="min-h-[50vh] lg:h-[calc(100vh-64px)] flex justify-center items-center flex-col bg-slate-200 p-4">
@@ -34,36 +52,36 @@ const AddMoney: React.FC = () => {
         className="w-full rounded-lg border border-gray-200 border-gray-700 dark:bg-gray-800 max-w-xl lg:p-8"
       >
         <div className="flex flex-col">
-            <Label name="Amount" />
-            <InputBox
-              type="text"
-              name="amount"
-              value={formData.amount}
-              onChange={handleInputChange}
-              placeholder="100"
-            />
-            <br />
-            <Label name="Bank" />
-            <select
-              name="selectedBank"
-              value={formData.selectedBank}
-              onChange={handleInputChange}
-              className="block w-full mb-5 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm focus:ring-primary-500 border-gray-600 bg-gray-700 text-white placeholder:text-gray-400 focus:border-primary-500 focus:ring-primary-500"
-              required
-            >
-              <option value="" disabled>
-                Select your bank
-              </option>
-              <option value="HDFC">HDFC</option>
-              <option value="AXIS">AXIS</option>
-            </select>
+          <Label name="Amount" />
+          <InputBox
+            type="text"
+            name="amount"
+            value={formData.amount}
+            onChange={handleInputChange}
+            placeholder="100"
+          />
+          <br />
+          <Label name="Bank" />
+          <select
+            name="selectedBank"
+            value={formData.selectedBank}
+            onChange={handleInputChange}
+            className="block w-full mb-5 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm focus:ring-primary-500 border-gray-600 bg-gray-700 text-white placeholder:text-gray-400 focus:border-primary-500 focus:ring-primary-500"
+            required
+          >
+            <option value="" disabled>
+              Select your bank
+            </option>
+            <option value="HDFC">HDFC</option>
+            <option value="AXIS">AXIS</option>
+          </select>
         </div>
 
         <button
           type="submit"
           className="w-full text-gray-900 border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700"
         >
-          Pay Now
+          Add Money
         </button>
       </form>
     </div>

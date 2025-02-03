@@ -5,5 +5,5 @@ import { redirect } from "next/navigation";
 export default async function Page() {
   const session = await getServerSession(authOptions);
   if (session === null) redirect("/signin");
-  else redirect("/dashboard");
+  else redirect("/home");
 }
