@@ -2,14 +2,15 @@
 import React, { useState } from "react";
 import Label from "../label";
 import InputBox from "../inputbox";
-import { useRouter } from "next/navigation"; // Add this import at the top
+import { useRouter } from "next/navigation";
+import { useToast } from "../toast-context";
 
 type AddMoneyProps = {
   createOnRampTransaction: any;
 };
 const AddMoney: React.FC<AddMoneyProps> = ({ createOnRampTransaction }) => {
-  const router = useRouter(); // Add this line
-
+  const router = useRouter();
+  const toast = useToast();
   const [formData, setFormData] = useState({
     amount: "",
     selectedBank: "",
@@ -35,7 +36,11 @@ const AddMoney: React.FC<AddMoneyProps> = ({ createOnRampTransaction }) => {
       provider: formData.selectedBank,
     });
     if (response.status) {
-      alert("success");
+      if (toast) {
+        toast.success(
+          "Your transaction is being processed. Please note that during development, you'll need to simulate the bank server by manually hitting the Postman endpoint."
+        );
+      }
       setFormData({ amount: "", selectedBank: "" });
       router.refresh();
     } else {
