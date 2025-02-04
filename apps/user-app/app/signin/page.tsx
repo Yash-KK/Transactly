@@ -32,7 +32,7 @@ const SignIn: React.FC = () => {
   };
 
   const handleGithubSignin = async () => {
-    await signIn("github", { callbackUrl: "/dashboard" });
+    await signIn("github", { callbackUrl: "/home" });
   };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

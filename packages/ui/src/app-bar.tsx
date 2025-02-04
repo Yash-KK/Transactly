@@ -13,7 +13,7 @@ export default function AppBar() {
 
   const handleRedirection = () => {
     if (session.status === "authenticated") {
-      router.push("/dashboard");
+      router.push("/home");
     } else {
       router.push("/signin");
     }

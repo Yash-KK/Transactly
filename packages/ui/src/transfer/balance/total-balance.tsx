@@ -1,6 +1,11 @@
 import React from "react";
 import DisplayBalance from "./display-balance";
-const TotalBalance: React.FC = () => {
+
+type BalanceProps = {
+  amount: number,
+  locked: number
+}
+const TotalBalance: React.FC<BalanceProps> = ({amount, locked}) => {
   return (
     <div
       className="h-1/3 m-5 space-y-4 border rounded p-6 border-gray-700 bg-gray-800 overflow-y-auto [&::-webkit-scrollbar]:w-2
@@ -13,9 +18,9 @@ const TotalBalance: React.FC = () => {
         Balance
       </div>
 
-      <DisplayBalance title="Unlocked Balance" amount={600} />
-      <DisplayBalance title="Locked Balance" amount={0} />
-      <DisplayBalance title="Total Balance" amount={600} />
+      <DisplayBalance title="Unlocked Balance" amount={amount} />
+      <DisplayBalance title="Locked Balance" amount={locked} />
+      <DisplayBalance title="Total Balance" amount={amount + locked} />
     </div>
   );
 };
