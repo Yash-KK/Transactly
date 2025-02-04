@@ -21,13 +21,31 @@ const getOnRampTransactions = async () => {
 
   return transactions;
 };
+
+const getUserBalance = async () => {
+  const userId = await getUserId();
+  const balance = await prisma.balance.findFirst({
+    where: {
+      userId: userId,
+    },
+    select: {
+      amount: true,
+      locked: true,
+    },
+  });
+
+  return balance;
+};
 const Transfer = async () => {
   const transactions = await getOnRampTransactions();
+  const balance = await getUserBalance();
   return (
     <div className="grid grid-cols-2">
       <AddMoney createOnRampTransaction={createOnRampTransaction} />
       <div className="flex flex-col bg-slate-200">
-        <TotalBalance />
+        {balance && (
+          <TotalBalance amount={balance.amount} locked={balance.locked} />
+        )}
         <RecentTransactions transactions={transactions} />
       </div>
     </div>
