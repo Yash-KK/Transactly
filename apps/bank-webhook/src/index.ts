@@ -10,7 +10,6 @@ app.use(express.json());
 // The bank will hit this webhook to tell 'Transactly's backend to update its balance
 app.post("/webhook", async (req: Request, res: Response) => {
   const { amount, token, userId } = req.body;
-  console.log(amount, token, userId);
 
   // increment the balance for the user
   await prisma.$transaction([

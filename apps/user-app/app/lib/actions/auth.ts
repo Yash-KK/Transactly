@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "@repo/db";
 import { z } from "zod";
-import bcrypt from  "bcryptjs";
+import bcrypt from "bcryptjs";
 
 const SignUpSchema = z.object({
   firstName: z.string().trim().min(1, { message: "Name field is required" }),
@@ -31,22 +31,28 @@ export async function signupAction(
     if (existingUser) {
       return { success: false, message: "Email already exists" };
     }
-    const hashedPassword = await bcrypt.hash(validatedSignUpData.data!.password, 10);
+    const hashedPassword = await bcrypt.hash(
+      validatedSignUpData.data!.password,
+      10
+    );
 
-    try{
-      await prisma.user.create({
+    try {
+      const newUser = await prisma.user.create({
         data: {
           firstName: validatedSignUpData.data!.firstName,
           email: validatedSignUpData.data!.email,
           password: hashedPassword,
         },
       });
-  
-    } catch(error){
-      return { success: false, message: "failed to create new user" };
 
+      await prisma.balance.create({
+        data: {
+          userId: newUser.id,
+        },
+      });
+    } catch (error) {
+      return { success: false, message: "failed to create new user" };
     }
-    
 
     return { success: true, message: "New user created" };
   } catch (error) {
