@@ -37,7 +37,6 @@ const createOnRampTransaction = async ({
         userId: userId,
       },
     });
-    console.log("instance created")
     return {
       status: true,
     };
