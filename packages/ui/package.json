@@ -14,7 +14,7 @@
     "./button": "./src/button.tsx",
     "./label": "./src/label.tsx",
     "./inputbox": "./src/inputbox.tsx",
-    "./side-bar": "./src/side-bar.tsx",
+    "./side-bar": "./src/side-bar/side-bar.tsx",
     "./add-money": "./src/transfer/add-money.tsx",
     "./loading-skeleton": "./src/transfer/loading-skeleton.tsx",
     "./total-balance": "./src/transfer/balance/total-balance.tsx",

@@ -28,9 +28,6 @@ const AddMoney: React.FC<AddMoneyProps> = ({ createOnRampTransaction }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Amount:", formData.amount);
-    console.log("Selected Bank:", formData.selectedBank);
-
     const response = await createOnRampTransaction({
       amount: formData.amount,
       provider: formData.selectedBank,
