@@ -4,6 +4,10 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo run dev",
+    "start-user-app": "cd apps/user-app && npm run dev",
+    "build-user-app": "cd apps/user-app && npm run build",
+    "start-bank-webhook": "cd apps/bank-webhook && npm run dev",
+    "build-bank-webhook": "cd apps/bank-webhook && npm run build",
     "lint": "turbo run lint",
     "check-types": "turbo check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
