@@ -1,0 +1,16 @@
+FROM node:22-alpine
+
+WORKDIR /app
+
+COPY package*.json turbo.json meta.json ./
+COPY packages ./packages
+
+COPY /apps/bank-webhook ./apps/bank-webhook
+RUN npm install
+
+
+RUN npm run build-bank-webhook
+
+EXPOSE 3003
+
+CMD ["npm", "run", "start-bank-webhook"]

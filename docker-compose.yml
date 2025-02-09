@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  user-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.UserApp
+    ports:
+      - "3000:3000"
+    env_file:
+      - apps/user-app/.env
+
+  bank-webhook:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.BankWebHook
+    ports:
+      - "3003:3003"
+    env_file:
+      - apps/bank-webhook/.env
