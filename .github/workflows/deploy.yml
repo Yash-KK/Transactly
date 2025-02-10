@@ -1,0 +1,12 @@
+name: CD
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-CD-workflow:
+    name: Print Something
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "It Works"
