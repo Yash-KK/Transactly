@@ -7,6 +7,7 @@ COPY packages ./packages
 
 COPY /apps/bank-webhook ./apps/bank-webhook
 RUN npm install
+RUN npx turbo db:generate
 
 
 RUN npm run build-bank-webhook
