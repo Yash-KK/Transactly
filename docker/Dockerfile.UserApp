@@ -8,6 +8,8 @@ COPY packages ./packages
 COPY /apps/user-app ./apps/user-app
 RUN npm install
 RUN npx turbo db:generate
+
+RUN cd packages/ui && npm run build
 RUN npm run build-user-app
 EXPOSE 3000
 
