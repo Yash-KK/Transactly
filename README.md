@@ -1,58 +1,84 @@
-# Turborepo Tailwind CSS starter
+# Transactly - Monorepo with Next.js and Tailwind CSS
 
-This Turborepo starter is maintained by the Turborepo core team.
+Transactly is a comprehensive financial application designed as a monorepo, which includes multiple Next.js applications sharing a UI library. The project leverages modern web technologies to provide a seamless user experience, focusing on user authentication, transaction management, and a responsive design. This document provides an in-depth overview of the project, its features, architecture, and how to get started.
 
-## Using this example
+## Table of Contents
 
-Run the following command:
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-```sh
-npx create-turbo@latest -e with-tailwind
+## Project Overview
+
+Transactly aims to simplify financial transactions and user management through a user-friendly interface. The application is built with a focus on modularity and reusability, allowing developers to easily extend and maintain the codebase. The monorepo structure enables efficient collaboration and code sharing across different applications within the project.
+
+### Key Components
+
+1. **User Application**: The main frontend application where users can sign up, log in, and manage their transactions.
+2. **Bank Webhook Service**: A backend service that listens for incoming webhook requests from banks to update user balances and transaction statuses.
+3. **Shared UI Library**: A collection of reusable UI components built with Tailwind CSS, ensuring a consistent look and feel across applications.
+
+## Features
+
+- **User Authentication**: Secure user authentication using NextAuth.js, supporting both email/password and GitHub login.
+- **Transaction Management**: Users can view, create, and manage their transactions seamlessly.
+- **Responsive Design**: The application is fully responsive, providing an optimal experience on both desktop and mobile devices.
+- **Real-time Updates**: The application updates user balances and transaction statuses in real-time through webhook integration.
+- **Error Handling**: Comprehensive error handling and user feedback mechanisms to enhance user experience.
+- **Modular Architecture**: The codebase is organized into modules, making it easy to maintain and extend.
+
+## Architecture
+
+The project follows a modular architecture, with the following key components:
+
+- **Frontend (User Application)**:
+  - Built with Next.js, allowing for server-side rendering and static site generation.
+  - Utilizes React for building interactive UI components.
+  - Tailwind CSS is used for styling, providing utility-first CSS classes for rapid UI development.
+
+- **Backend (Bank Webhook Service)**:
+  - Built with Express.js to handle incoming webhook requests from banks.
+  - Integrates with Prisma for database management, allowing for easy data manipulation and querying.
+
+- **Shared Libraries**:
+  - A UI library containing reusable components such as buttons, forms, and modals.
+  - Shared configurations for ESLint and TypeScript to ensure code quality and consistency across the project.
+
+## Technologies Used
+
+- **Next.js**: A React framework for building server-rendered applications.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **TypeScript**: A superset of JavaScript that adds static types, enhancing code quality and maintainability.
+- **Prisma**: An ORM for database management, providing a type-safe database client.
+- **Express**: A web framework for Node.js used in the bank webhook service.
+- **Docker**: For containerization and deployment, ensuring consistent environments across development and production.
+- **NextAuth.js**: A complete open-source authentication solution for Next.js applications.
+
+## Installation
+
+To set up the project locally, follow these steps:
+
+1. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/yourusername/transactly.git
+   cd transactly
+   ```
+
+
+3. **Set Up Environment Variables**: Create a `.env` file in the root directory and add the necessary environment variables, such as database connection strings and API keys.
+
+## Running the Application
+The easiest way to run the application is to use Docker. You can build and run the Docker containers using the following commands:
+
+```bash
+docker-compose up
 ```
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Building packages/ui
-
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.js`. This was chosen for several reasons:
-
-- Make sharing one `tailwind.config.js` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
-
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.js` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
-
-For example, in [tailwind.config.js](packages/tailwind-config/tailwind.config.js):
-
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
-```
-
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+This command will start both the user app and the bank webhook service, making them accessible on their respective ports.
