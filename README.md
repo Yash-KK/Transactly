@@ -46,10 +46,6 @@ The project follows a modular architecture, with the following key components:
   - Built with Express.js to handle incoming webhook requests from banks.
   - Integrates with Prisma for database management, allowing for easy data manipulation and querying.
 
-- **Shared Libraries**:
-  - A UI library containing reusable components such as buttons, forms, and modals.
-  - Shared configurations for ESLint and TypeScript to ensure code quality and consistency across the project.
-
 ## Technologies Used
 
 - **Next.js**: A React framework for building server-rendered applications.
